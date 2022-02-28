@@ -1,0 +1,68 @@
+<!--<div class="modal fade" id="logInModule" tabindex="-1" role="dialog" aria-labelledby="logInModule">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="logInModule">Add Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <div class="form-group">
+                <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" id="username" name="username" #username  placeholder="Enter Username"  required>
+                
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password"  id="password" name="password" #password placeholder="Enter Password"  required>
+                        
+                    <div class="modal-footer">
+                        <button  type="submit" class="btn btn-primary" id="login-form" (click)="clickme(username.value,password.value)">log in</button>
+                     </div>
+                                         <label>
+                    </label>
+                  </div>
+                
+                 
+            </div>
+            
+         </div>
+      </div>
+    </div>-->
+
+
+
+    
+    
+      <div class="container" *ngIf=visible>
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username"  id="username" name="username" #username required>
+    
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password" name="password" #password required>
+            
+        <button type="submit" (click)="log(username.value,password.value)" >Login</button>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn" (click)="changeVisible()">Sign Up</button>
+          </div>
+        </div>
+     
+
+        <div class="container" *ngIf=!visible>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username"  id="username2" name="username" #username required>
+    
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="password2" name="password" #password required>
+    
+            <label for="uname"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email"  id="Email" name="Email" #Email required>
+    
+            <label for="uname"><b>Phone Number</b></label>
+            <input type="text" placeholder="Enter Phone Number"  id="phoneNumber" name="phoneNumber" #phoneNumber required>
+            <label for="uname"><b>Gender</b></label>
+            <input type="text" placeholder="MALE or FEMALE"  id="gender" name="gender" #gender required>
+        
+            <button type="submit" routerLink="../login" (click)="sign(username.value,password.value,Email.value,phoneNumber.value,gender.value)">Creat Account</button>
+         </div>

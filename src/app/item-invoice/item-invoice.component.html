@@ -1,0 +1,17 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Invoice Id</th>
+              <th>Item Id</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemInvoice" >
+            <td>{{ item.invoiceId }}</td>
+            <td>{{ item.ItemId }}</td>
+            <button mat-raised-button (click)="next(item.invoiceId)">SHOW</button>
+          </tr>
+        </tbody>
+      </table>
+</div>

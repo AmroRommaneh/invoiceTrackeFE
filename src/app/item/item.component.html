@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Tabs</title>
+</head>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" routerLink="../home">Invoice Tracker</a>
+      </div>
+        <ul class="nav navbar-nav">
+        <li><a routerLink="../invoice">Invoice</a></li>
+        <li><a routerLink="../item">Item</a></li>
+        <li><a routerLink="../attachment">Attaachment</a></li>
+        <li><a routerLink="../user">Users</a></li>
+        <li><a routerLink="../login">Log Out</a></li>
+      </ul>
+  
+    </div>
+  </nav>
+  </body>
+<body>
+  <div class="info">
+    
+     
+
+
+<form >
+  <label for="Iname">item name:</label>
+  <input type="text" placeholder="Item name"  id="itemName" name="itemName" #itemName required><br><br>
+
+  <label for="Iprice">item price:</label>
+  <input type="text" placeholder="Item Price"  id="itemPrice" name="itemPrice" #itemPricee required><br><br>
+  <label for="Amount">item Amount:</label>
+  <input type="text" placeholder="Item Amount"  id="itemAmount" name="itemAmount" #itemAmount required><br><br>
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn" (click)="addItem(itemName.value,itemPricee.value,itemAmount.value)">Add Item</button>
+  </div>
+   </form>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Tabs</title>
+  </head>
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" routerLink="../home">Invoice Tracker</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a routerLink="../invoice">Invoice</a></li>
+          <li><a routerLink="../item">Item</a></li>
+          <li><a routerLink="../attachment">Attaachment</a></li>
+          <li><a routerLink="../user">Users</a></li>
+          <li><a routerLink="../login">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+  </body>
+  <body>
+    <div class="mytabs">
+      <input type="radio" id="tabSearch" name="mytabs" />
+      <label for="tabSearch">Search for Invoice</label>
+      <div class="tab">
+        <h2>Search for Invoice</h2>
+        <label for="externalInvoiceId">External Invoice Id:</label>
+        <input
+          type="text"
+          placeholder=" External Invoice Id"
+          id="externalInvoiceId2"
+          name="externalInvoiceId"
+          #externalInvoiceId2
+          required
+        /><br /><br />
+        <button type="submit" (click)="searchInvoice(externalInvoiceId2.value)">
+          Search
+        </button>
+        <div class="mytab">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>External Invoice Id</th>
+                <th>Date Of creation</th>
+                <th>Attaachment List</th>
+                <th>Status</th>
+                <th>Date Of Deletion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="invoice">
+                <td>{{ invoice.invoiceId }}</td>
+                <td>{{ invoice.amount }}</td>
+                <td>{{ invoice.externalInvoiceId }}</td>
+                <td>{{ invoice.dateOfCreation }}</td>
+                <td>{{ invoice.attachmentList }}</td>
+                <td>{{ invoice.status }}</td>
+                <td>{{ invoice.dateOfDeletion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <input type="radio" id="tabCreate" name="mytabs" />
+      <label for="tabCreate">Creat Invoice</label>
+      <div class="tab">
+        <h2>Create Invoice</h2>
+
+        <input
+          type="submit"
+          (click)="
+            createInvoice(
+              invoiceAmount.value,
+              dateOfCreation.value,
+              items.value,
+              externalInvoiceId.value
+            )
+          "
+          value="Create"
+        />
+        <form>
+          <label for="invoiceAmount">Amount:</label>
+          <input
+            type="text"
+            placeholder=" Amount"
+            id="invoiceAmount"
+            name="invoiceAmount"
+            #invoiceAmount
+            required
+          /><br /><br />
+          <label for="dateOfCreation">Date of Creation</label>
+          <input
+            type="text"
+            placeholder="YYYY-MM-DD"
+            id="dateOfCreation"
+            name="dateOfCreation"
+            #dateOfCreation
+            required
+          /><br /><br />
+          <label for="externalInvoiceId">External Invoice Id:</label>
+          <input
+            type="text"
+            placeholder=" External Invoice Id"
+            id="externalInvoiceId"
+            name="externalInvoiceId"
+            #externalInvoiceId
+            required
+          />
+          <br />
+
+          <label for="items">Item:</label>
+
+          <form class="example-form">
+            <input
+              type="text"
+              placeholder="Items ID's sepreated by ,"
+              id="items"
+              name="items"
+              #items
+              required
+            />
+          </form>
+
+          <div>
+          
+            <table mat-table
+            matSort
+            [dataSource]="dataSource"
+            #TableOneSort="matSort"
+            class="mat-elevation-z8"
+            style="width: 100%;">
+              <ng-container matColumnDef="itemId">
+                <th mat-header-cell *matHeaderCellDef>Item Id &nbsp; &nbsp;</th>
+                <br />
+                <td mat-cell *matCellDef="let element">
+                  {{ element.itemId }} &nbsp; &nbsp;
+                </td>
+                <br />
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Item Name &nbsp;</th>
+                <br />
+                <td mat-cell *matCellDef="let element">
+                  {{ element.name }} &nbsp;
+                </td>
+                <br />
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Item Price</th>
+                <br />
+                <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+                <br /><br /><br />
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsOne"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
+            </table>
+
+            <mat-paginator
+    #TableOnePaginator="matPaginator"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  ></mat-paginator>
+          </div>
+        </form>
+      </div>
+
+      <input type="radio" id="tabUpdate" name="mytabs" />
+      <label for="tabUpdate">Update Invoice</label>
+      <div class="tab">
+        <h2>Update Invoice</h2>
+        <button
+          type="submit"
+          (click)="
+            updateInvoice(
+              invoiceAmount1.value,
+              dateOfCreation1.value,
+              items1.value,
+              externalInvoiceId1.value
+            )
+          "
+        >
+          Update
+        </button>
+
+        <label for="externalInvoiceId"
+          >External Invoice Id For The Invoivce You Want To Update:</label
+        >
+        <input
+          type="text"
+          placeholder=" External Invoice Id"
+          id="externalInvoiceId1"
+          name="externalInvoiceId"
+          #externalInvoiceId1
+          required
+        /><br /><br />
+        <label for="invoiceAmount">Amount:</label>
+        <input
+          type="text"
+          placeholder=" Amount"
+          id="invoiceAmount1"
+          name="invoiceAmount"
+          #invoiceAmount1
+        /><br /><br />
+        <label for="dateOfCreation">Date of Creation</label>
+        <input
+          type="text"
+          placeholder="YYYY-MM-DD"
+          id="dateOfCreation1"
+          name="dateOfCreation"
+          #dateOfCreation1
+        /><br /><br />
+
+        <label for="items">Item:</label>
+        <input
+          type="text"
+          placeholder="Items ID sepreated by ,"
+          id="items1"
+          name="items"
+          #items1
+        /><br /><br />
+        <div>
+          <table mat-table
+          matSort
+          [dataSource]="dataSource2"
+          #TableTwoSort="matSort"
+          class="mat-elevation-z8"
+          style="width: 100%;">
+
+            <ng-container matColumnDef="itemId1">
+              <th mat-header-cell *matHeaderCellDef>Item Id &nbsp;</th>
+              <td mat-cell *matCellDef="let element1">
+                {{ element1.itemId }} &nbsp; &nbsp;
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="name1">
+              <th mat-header-cell1 *matHeaderCellDef>Item Name &nbsp;</th>
+              <th></th>
+              <td mat-cell *matCellDef="let element1">
+                {{ element1.name }} &nbsp;&nbsp;
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price1">
+              <th mat-header-cell *matHeaderCellDef>Item Price &nbsp;</th>
+              <td mat-cell *matCellDef="let element1">
+                {{ element1.price }} &nbsp;&nbsp;
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo"></tr>
+            <tr mat-row *matRowDef="let row1; columns: displayedColumnsTwo"></tr>
+          </table>
+
+          <mat-paginator
+          #TableTwoPaginator="matPaginator"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+        ></mat-paginator>
+        </div>
+      </div>
+
+      <input type="radio" id="tabDelete" name="mytabs" />
+      <label for="tabDelete">Delete Invoice</label>
+      <div class="tab">
+        <h2>Delete Invoice</h2>
+
+        <label for="externalInvoiceId">External Invoice Id:</label>
+        <input
+          type="text"
+          id="externalInvoiceId3"
+          name="externalInvoiceId"
+          #externalInvoiceId3
+        /><br /><br />
+        <button type="submit" (click)="deleteInvoice(externalInvoiceId3.value)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+<ul>
+<button type="submit" (click)="moveAttachment()" >Attachment</button>
+<button type="submit" (click)="moveInvoice()">Invoice</button>
+<button type="submit" (click)="moveItem()">Item</button>
+
+</ul>
+
+</body>
+</html>-->
+
+
+<!--Navbar-->
+
+
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="../home">Invoice Tracker</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="../invoice">Invoice</a></li>
+      <li><a routerLink="../item">Item</a></li>
+      <li><a routerLink="../attachment">Attaachment</a></li>
+      <li><a routerLink="../user">Users</a></li>
+      <li><a routerLink="../login">Log Out</a></li>
+
+
+    </ul>
+
+  </div>
+</nav>
+  
+<div class="container" *ngIf=visible>
+   <div class="tab">
+      <h2> last created invoices </h2>
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <th>Amount</th>
+          <th>External Invoice Id</th>
+          <th>Date Of creation</th>
+          <th>Attaachment List</th>
+          <th> Status</th>
+          <th>Date Of Deletion</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let invoice of Invoices" >
+        <td>{{ invoice.invoiceId }}</td>
+        <td>{{ invoice.amount }}</td>
+        <td>{{ invoice.externalInvoiceId }}</td>
+        <td>{{ invoice.dateOfCreation }}</td>
+        <td>{{ invoice.attachmentList }}</td>
+        <td>{{ invoice.status }}</td>
+        <td>{{ invoice.dateOfDeletion }}</td>
+
+
+        <button  (click)="show(invoice.invoiceId)">SHOW ITEMS</button>
+        <button  (click)="showAttachment(invoice.invoiceId)">SHOW ATTACHMENTS</button>
+        <button  (click)="delete(invoice.externalInvoiceId)">Delete</button>
+
+      </tr>
+    </tbody>
+  </table>
+
+   <!--   <textarea id="lastTen" name="lastTen" rows="25" cols="80"  value="{{responseStr}}">
+  
+    
+  </textarea>-->
+</div>
+<div>
+ <input type="button" id="tabNext10" name="mytabs" (click)="next10()">
+    <label for="tabNext10">NEXT</label>
+
+       <input type="button" id="tabPrevious10" name="mytabs" (click)="prev10()">
+    <label for="tabPrevious10">PREVIOUS</label>
+      </div>
+</div>
+
+
+
+<div class="container" *ngIf=!visible >
+  <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Invoice Id</th>
+            <th>Item Id</th>
+            <button  (click)="close()">Close</button>
+
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of itemInvoice" >
+          <td>{{ item.invoiceId}}</td>
+          <td>{{ item.itemId }}</td>
+          <button (click)="showItem(item.itemId)">Show Item</button>
+
+        
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div class="container" *ngIf=visibleAttachment >
+  <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Attaachment Id</th>
+            <th>Attaachment name</th>
+            <th>Attaachment Type</th>
+
+            <button routerLink="../attachment">Add Attaachment</button>
+
+            <button  (click)="closeA()">Close</button>
+
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attachment of Attachments" >
+          <td>{{ attachment.id}}</td>
+          <td>{{ attachment.name}}</td>
+          <td>{{ attachment.attachmentType}}</td>
+
+          <button (click)="getImage(attachment.id,attachment.attachmentType)">Show Attachment</button>
+
+        
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="col-md-12" *ngIf=visibleImage>
+      <div *ngIf=retrievedImage>
+          <img src={{retrievedImage}}>
+      </div>
+
+  </div>
+
+  <div class="col-md-12" *ngIf=visiblePdf>
+    <div *ngIf=pdfSource>
+      <pdf-viewer src={{pdfSource}} ></pdf-viewer>
+    </div>
+
+</div>
+ 
+
+
+</div>
+
+
+<div class="container" *ngIf=visibleDetalis>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+         
+            <th>Item name</th>
+            <th>Item price</th>
+
+            <button mat-raised-button (click)="closeD()">Close</button>
+
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="itemW" >
+          <td>{{ itemW.name }}</td>
+          <td>{{ itemW.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+</div>
+</body>
+</html>
+
+
+
+  
+ 
+ 
